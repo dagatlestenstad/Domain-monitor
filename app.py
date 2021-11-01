@@ -2,6 +2,7 @@ import config
 import os
 import yaml
 import time
+from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import smtplib
@@ -57,7 +58,7 @@ if __name__ == '__main__':
         for domain in domains['Domains']:
             html = get_html_from_browser('https://www.webhuset.no/bestillingsskjema/domenesok?coupon-2=&fqdn='+ domain, 2)
             status = get_text_from_tagname(html, 'div', 'col-xs-12 result-text').strip()
-            print(domain + ": " + status)
+            print(datetime.now().strftime("%d.%m.%Y %H:%M:%S") + " " + domain + ": " + status)
 
             if status.find("ledig") != -1:
                 email = domains['Email']
